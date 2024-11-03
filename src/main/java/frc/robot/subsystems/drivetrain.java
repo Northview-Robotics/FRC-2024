@@ -95,11 +95,9 @@ public class drivetrain extends SubsystemBase {
             downSpeedSelectorOld = downSpeedSelector;
         }
 
-        double m = speedModes[speedIndex];
-
         if (Math.abs(Leftjoy) > 0.1 || Math.abs(Rightjoy) > 0.1) {
-            leftfront.set((Leftjoy + Rightjoy) * m);
-            rightfront.set((Leftjoy - Rightjoy) * m);
+            leftfront.set((Leftjoy + Rightjoy) * speedModes[speedIndex]);
+            rightfront.set((Leftjoy - Rightjoy) * speedModes[speedIndex]);
         } else {
             Stopdrive();
         }
