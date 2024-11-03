@@ -34,10 +34,7 @@ public class drivetrain extends SubsystemBase {
     private WPI_TalonSRX rightrear;
 
     // Speed Selector
-    private Boolean upSpeedSelectorOld;
-    private Boolean downSpeedSelectorOld;
-    private int speedIndex;
-    private double[] speedModes = {0.25, 0.5, 0.75, 1.0};
+    private double[] speedModes = {0.5, 0.75, 1.0};
 
     // //Gyro stuff
     // private AHRS navx;
@@ -79,30 +76,28 @@ public class drivetrain extends SubsystemBase {
         rightfront.set(0);
     }
 
-    public void Drivecode(double Leftjoy, double Rightjoy, Boolean upSpeedSelector, Boolean downSpeedSelector) {
-
-        if (upSpeedSelector != upSpeedSelectorOld) {
-            if (upSpeedSelector && speedIndex < speedModes.length - 1) {
-                speedIndex++;
-            }
-            upSpeedSelectorOld = upSpeedSelector;
-
-        } 
-        if (downSpeedSelector != downSpeedSelectorOld) {
-            if (downSpeedSelector && speedIndex > 0) {
-                speedIndex--;
-            }
-            downSpeedSelectorOld = downSpeedSelector;
+    private double SelectSpeed(double select){
+        if(select > .1 && select < .9){
+            return speedModes[1];
+        } else if(select >= .9){
+            return speedModes[2];
+        } else{
+            return speedModes[0];
         }
+    }
+
+    public void Drivecode(double Leftjoy, double Rightjoy, double Select) {
+
+        double s = SelectSpeed(Select);
 
         if (Math.abs(Leftjoy) > 0.1 || Math.abs(Rightjoy) > 0.1) {
-            leftfront.set((Leftjoy + Rightjoy) * speedModes[speedIndex]);
-            rightfront.set((Leftjoy - Rightjoy) * speedModes[speedIndex]);
+            leftfront.set((Leftjoy + Rightjoy) * s);
+            rightfront.set((Leftjoy - Rightjoy) * s);
         } else {
             Stopdrive();
         }
     }
-    
+
 
         //pathplanner stuff *not working yet :__ (
        //edit 10/15/2024 I got it working B) -Shahriar

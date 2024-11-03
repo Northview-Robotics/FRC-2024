@@ -19,7 +19,7 @@ public class operatorinterface extends SubsystemBase {
 
     //Integrating Subsystem and driver inputs
     private void updateDrive(){
-        drive.Drivecode(controller.getLeftY(), controller.getRightX(), controller.getLeftBumperReleased(), controller.getRightBumperReleased());
+        drive.Drivecode(controller.getLeftY(), controller.getRightX(), controller.getLeftTriggerAxis());
     }
 
     private void updateIntake(){
