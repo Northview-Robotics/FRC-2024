@@ -33,6 +33,12 @@ public class drivetrain extends SubsystemBase {
     private WPI_TalonSRX rightfront;
     private WPI_TalonSRX rightrear;
 
+    // Speed Selector
+    private Boolean upSpeedSelectorOld;
+    private Boolean downSpeedSelectorOld;
+    private int speedIndex;
+    private double[] speedModes = {0.25, 0.5, 0.75, 1.0};
+
     // //Gyro stuff
     // private AHRS navx;
     // private Encoder rightEncoder;
@@ -73,16 +79,33 @@ public class drivetrain extends SubsystemBase {
         rightfront.set(0);
     }
 
-    public void Drivecode(double Leftjoy, double Rightjoy) {
+    public void Drivecode(double Leftjoy, double Rightjoy, Boolean upSpeedSelector, Boolean downSpeedSelector) {
+
+        if (upSpeedSelector != upSpeedSelectorOld) {
+            if (upSpeedSelector && speedIndex < speedModes.length - 1) {
+                speedIndex++;
+            }
+            upSpeedSelectorOld = upSpeedSelector;
+
+        } 
+        if (downSpeedSelector != downSpeedSelectorOld) {
+            if (downSpeedSelector && speedIndex > 0) {
+                speedIndex--;
+            }
+            downSpeedSelectorOld = downSpeedSelector;
+        }
+
+        double m = speedModes[speedIndex];
+
         if (Leftjoy > 0.1 || Leftjoy < -0.1) {
-            leftfront.set(Leftjoy);
-            rightfront.set(Leftjoy);
+            leftfront.set(Leftjoy * m);
+            rightfront.set(Leftjoy * m);
         } else if (Rightjoy > 0.1) {
-            leftfront.set(Rightjoy);
-            rightfront.set(-Rightjoy);
-        } else if (Rightjoy < -0.1) {
-            leftfront.set(Rightjoy);
-            rightfront.set(-Rightjoy);
+            leftfront.set(Rightjoy * m);
+            rightfront.set(-Rightjoy * m);
+        } else if (Rightjoy < -0.1 * m) {
+            leftfront.set(Rightjoy * m);
+            rightfront.set(-Rightjoy * m);
         } else {
             Stopdrive();
         }
