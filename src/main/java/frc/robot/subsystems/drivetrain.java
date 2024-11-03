@@ -77,9 +77,9 @@ public class drivetrain extends SubsystemBase {
     }
 
     private double SelectSpeed(double select){
-        if(select > .1 && select < .9){
+        if(select > 0.1 && select < 0.9){
             return speedModes[1];
-        } else if(select >= .9){
+        } else if(select >= 0.9){
             return speedModes[2];
         } else{
             return speedModes[0];
