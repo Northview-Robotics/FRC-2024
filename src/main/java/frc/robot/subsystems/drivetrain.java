@@ -97,15 +97,9 @@ public class drivetrain extends SubsystemBase {
 
         double m = speedModes[speedIndex];
 
-        if (Leftjoy > 0.1 || Leftjoy < -0.1) {
-            leftfront.set(Leftjoy * m);
-            rightfront.set(Leftjoy * m);
-        } else if (Rightjoy > 0.1) {
-            leftfront.set(Rightjoy * m);
-            rightfront.set(-Rightjoy * m);
-        } else if (Rightjoy < -0.1 * m) {
-            leftfront.set(Rightjoy * m);
-            rightfront.set(-Rightjoy * m);
+        if (Math.abs(Leftjoy) > 0.1 || Math.abs(Rightjoy) > 0.1) {
+            leftfront.set((Leftjoy + Rightjoy) * m);
+            rightfront.set((Leftjoy - Rightjoy) * m);
         } else {
             Stopdrive();
         }
