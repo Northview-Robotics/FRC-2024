@@ -80,9 +80,9 @@ public class drivetrain extends SubsystemBase {
         if(select > 0.1 && select < 0.9){
             return speedModes[1];
         } else if(select >= 0.9){
-            return speedModes[2];
-        } else{
             return speedModes[0];
+        } else{
+            return speedModes[2];
         }
     }
 
