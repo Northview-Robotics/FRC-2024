@@ -2,7 +2,13 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
+//import com.pathplanner.lib.auto.AutoBuilder;
+//import com.pathplanner.lib.util.ReplanningConfig;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkLowLevel.MotorType;
+
+
 
 // import edu.wpi.first.wpilibj.Encoder;
 // import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
@@ -28,10 +34,10 @@ public class drivetrain extends SubsystemBase {
     // Initializing objects
 
     //Motors and Controller
-    private WPI_TalonSRX leftfront;
-    private WPI_TalonSRX leftrear;
-    private WPI_TalonSRX rightfront;
-    private WPI_TalonSRX rightrear;
+    private CANSparkMax leftfront;
+    private CANSparkMax leftrear;
+    private CANSparkMax rightfront;
+    private CANSparkMax rightrear;
 
     // Speed Selector
     private double[] speedModes = {0.5, 0.75, 1.0};
@@ -49,10 +55,10 @@ public class drivetrain extends SubsystemBase {
     // private final SimpleMotorFeedforward feedforward;
     
     private drivetrain(){
-        leftfront = new WPI_TalonSRX(1);
-        leftrear = new WPI_TalonSRX(2);
-        rightfront = new WPI_TalonSRX(3);
-        rightrear = new WPI_TalonSRX(4);
+        leftfront = new CANSparkMax(1,MotorType.kBrushless);
+        leftrear = new CANSparkMax(2,MotorType.kBrushless);
+        rightfront = new CANSparkMax(3,MotorType.kBrushless);
+        rightrear = new CANSparkMax(4,MotorType.kBrushless);
         // navx = new AHRS(SPI.Port.kMXP);
         // rightEncoder = new Encoder(0,1);
         // leftEncoder = new Encoder(0,2);
@@ -68,6 +74,9 @@ public class drivetrain extends SubsystemBase {
 
         leftrear.follow(leftfront);
         rightrear.follow(rightfront);
+        
+        // leftrear.set(ControlMode.Follower, leftfront.getDeviceId());
+        // rightrear.set(ControlMode.Follower, rightfront.getDeviceId());   
     }
 
     //Drive Methods
@@ -93,6 +102,7 @@ public class drivetrain extends SubsystemBase {
         if (Math.abs(Leftjoy) > 0.1 || Math.abs(Rightjoy) > 0.1) {
             leftfront.set((Leftjoy + Rightjoy) * s);
             rightfront.set((Leftjoy - Rightjoy) * s);
+
         } else {
             Stopdrive();
         }
@@ -102,7 +112,7 @@ public class drivetrain extends SubsystemBase {
         //pathplanner stuff *not working yet :__ (
        //edit 10/15/2024 I got it working B) -Shahriar
        //note that the encoder spin rate values will be off because it's not connected to the shaft at the end of the gearbox 
-       //so the code might have to account for gear ratio
+       //so the code might have to account for gear ratio 
 
     //     autoBuilder = new AutoBuilder();
     //     AutoBuilder.configureRamsete(

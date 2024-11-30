@@ -10,7 +10,7 @@ public class operatorinterface extends SubsystemBase {
     private XboxController controller;
     private drivetrain drive = drivetrain.getInstance();
     private intake getIntake = intake.getInstance();
-    private arm robotArm = arm.getInstance();
+    // private arm robotArm = arm.getInstance();
 
     //constructors
     private operatorinterface(){
@@ -27,13 +27,13 @@ public class operatorinterface extends SubsystemBase {
     }
 
      private void updateArm(){
-        robotArm.runArm(controller.getAButton(), controller.getBButton());
+        // robotArm.runArm(controller.getAButton(), controller.getBButton());
     }
 
     @Override
     public void periodic(){
         updateDrive();
-        updateIntake();
+        updateIn`````````````````````````````````````````````````````````````````take();
         updateArm();
     }
     
