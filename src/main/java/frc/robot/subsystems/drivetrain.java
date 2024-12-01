@@ -55,10 +55,10 @@ public class drivetrain extends SubsystemBase {
     // private final SimpleMotorFeedforward feedforward;
     
     private drivetrain(){
-        leftfront = new CANSparkMax(1,MotorType.kBrushless);
-        leftrear = new CANSparkMax(2,MotorType.kBrushless);
-        rightfront = new CANSparkMax(3,MotorType.kBrushless);
-        rightrear = new CANSparkMax(4,MotorType.kBrushless);
+        leftfront = new CANSparkMax(4,MotorType.kBrushless);
+        leftrear = new CANSparkMax(3,MotorType.kBrushless);
+        rightfront = new CANSparkMax(2,MotorType.kBrushless);
+        rightrear = new CANSparkMax(1,MotorType.kBrushless);
         // navx = new AHRS(SPI.Port.kMXP);
         // rightEncoder = new Encoder(0,1);
         // leftEncoder = new Encoder(0,2);

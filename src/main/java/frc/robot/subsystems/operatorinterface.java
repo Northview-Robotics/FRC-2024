@@ -23,7 +23,7 @@ public class operatorinterface extends SubsystemBase {
     }
 
     private void updateIntake(){
-        getIntake.runIntake(controller.getRightBumper(), controller.getLeftBumper());
+        // getIntake.runIntake(controller.getRightBumper(), controller.getLeftBumper());
     }
 
      private void updateArm(){
@@ -33,8 +33,8 @@ public class operatorinterface extends SubsystemBase {
     @Override
     public void periodic(){
         updateDrive();
-        updateIn`````````````````````````````````````````````````````````````````take();
-        updateArm();
+        //updateIntake();
+        //updateArm();
     }
     
     
