@@ -90,12 +90,18 @@ public class drivetrain extends SubsystemBase {
 
         double s = SelectSpeed(Select);
 
-        if (Math.abs(Leftjoy) > 0.1 || Math.abs(Rightjoy) > 0.1) {
-            leftfront.set((Leftjoy + Rightjoy) * s);
-            rightfront.set((Leftjoy - Rightjoy) * s);
-        } else {
-            Stopdrive();
+        tmpLeftJoy = Leftjoy;
+        tmpRightJoy = Rightjoy;
+
+        if (Math.abs(Leftjoy) < 0.1) {
+            tmpLeftJoy = 0;
         }
+        if (Math.abs(Rightjoy) < 0.1) {
+            tmpRightJoy = 0;
+        }
+        
+        leftfront.set((tmpLeftJoy + tmpRightJoy) * s);
+        rightfront.set((tmpLeftJoy - tmpRightJoy) * s);
     }
 
 
