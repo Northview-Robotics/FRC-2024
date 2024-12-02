@@ -77,12 +77,12 @@ public class drivetrain extends SubsystemBase {
     }
 
     private double SelectSpeed(double select){
-        if(select > 0.1 && select < 0.9){
-            return speedModes[1];
-        } else if(select >= 0.9){
-            return speedModes[0];
-        } else{
+        if (select < 0.1){
             return speedModes[2];
+        } else if (select < 0.9){
+            return speedModes[1];
+        } else{
+            return speedModes[0];
         }
     }
 
@@ -90,20 +90,12 @@ public class drivetrain extends SubsystemBase {
 
         double s = SelectSpeed(Select);
 
-        tmpLeftJoy = Leftjoy;
-        tmpRightJoy = Rightjoy;
-
-        if (Math.abs(Leftjoy) < 0.1) {
-            tmpLeftJoy = 0;
-        }
-        if (Math.abs(Rightjoy) < 0.1) {
-            tmpRightJoy = 0;
-        }
+        double tmpLeftJoy = Math.abs(Leftjoy) < 0.1 ? 0 : Leftjoy;
+        double tmpRightJoy = Math.abs(Rightjoy) < 0.1 ? 0 : Rightjoy;
         
         leftfront.set((tmpLeftJoy + tmpRightJoy) * s);
         rightfront.set((tmpLeftJoy - tmpRightJoy) * s);
     }
-
 
         //pathplanner stuff *not working yet :__ (
        //edit 10/15/2024 I got it working B) -Shahriar
