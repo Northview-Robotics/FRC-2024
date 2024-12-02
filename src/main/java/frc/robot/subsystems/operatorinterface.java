@@ -22,13 +22,8 @@ public class operatorinterface extends SubsystemBase {
         drive.Drivecode(controller.getLeftY(), controller.getRightX(), controller.getLeftTriggerAxis());
     }
 
-    private void updateIntake(){
-        // getIntake.runIntake(controller.getRightBumper(), controller.getLeftBumper());
-    }
 
-     private void updateArm(){
-        // robotArm.runArm(controller.getAButton(), controller.getBButton());
-    }
+
 
     @Override
     public void periodic(){

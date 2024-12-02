@@ -55,10 +55,10 @@ public class drivetrain extends SubsystemBase {
     // private final SimpleMotorFeedforward feedforward;
     
     private drivetrain(){
-        leftfront = new CANSparkMax(4,MotorType.kBrushless);
-        leftrear = new CANSparkMax(3,MotorType.kBrushless);
-        rightfront = new CANSparkMax(2,MotorType.kBrushless);
-        rightrear = new CANSparkMax(1,MotorType.kBrushless);
+        leftfront = new CANSparkMax(1,MotorType.kBrushless);
+        leftrear = new CANSparkMax(2,MotorType.kBrushless);
+        rightfront = new CANSparkMax(4,MotorType.kBrushless);
+        rightrear = new CANSparkMax(3,MotorType.kBrushless);
         // navx = new AHRS(SPI.Port.kMXP);
         // rightEncoder = new Encoder(0,1);
         // leftEncoder = new Encoder(0,2);
@@ -71,6 +71,7 @@ public class drivetrain extends SubsystemBase {
 
         leftfront.setInverted(true);
         leftrear.setInverted(true);
+        // leftrear.setInverted(true);
 
         leftrear.follow(leftfront);
         rightrear.follow(rightfront);
@@ -97,15 +98,17 @@ public class drivetrain extends SubsystemBase {
 
     public void Drivecode(double Leftjoy, double Rightjoy, double Select) {
 
-        double s = SelectSpeed(Select);
+         double s = SelectSpeed(Select);
 
         if (Math.abs(Leftjoy) > 0.1 || Math.abs(Rightjoy) > 0.1) {
             leftfront.set((Leftjoy + Rightjoy) * s);
-            rightfront.set((Leftjoy - Rightjoy) * s);
+           rightfront.set((Leftjoy - Rightjoy) * s);
 
         } else {
             Stopdrive();
         }
+
+     
     }
 
 
