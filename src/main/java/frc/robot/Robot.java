@@ -9,7 +9,6 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.subsystems.drivetrain;
 import frc.robot.subsystems.arm;
 import frc.robot.subsystems.intake;
-import frc.robot.subsystems.climber;
 import frc.robot.subsystems.operatorinterface;
 //might have to import command scheduler if current code doesn't work
 //We're only gonna use this for initializing stuff lol
@@ -19,7 +18,6 @@ public class Robot extends TimedRobot {
   public drivetrain drive;
   public operatorinterface oi;
   public intake Intake;
-  public climber climb;
   public arm Arm;
 
   @Override
@@ -27,7 +25,6 @@ public class Robot extends TimedRobot {
     drive = drivetrain.getInstance();
     oi= operatorinterface.getInstance();
     Arm = arm.getInstance();
-    climb = climber.getInstance();
     Intake = intake.getInstance();
   }
 

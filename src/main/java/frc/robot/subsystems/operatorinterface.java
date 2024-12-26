@@ -10,7 +10,6 @@ public class operatorinterface extends SubsystemBase {
     private XboxController controller;
     private drivetrain drive = drivetrain.getInstance();
     private intake getIntake = intake.getInstance();
-    private climber climb = climber.getInstance();
     private arm robotArm = arm.getInstance();
 
     //constructors
@@ -28,10 +27,6 @@ public class operatorinterface extends SubsystemBase {
         getIntake.runIntake(controller.getRightBumper(), controller.getLeftBumper());
     }
 
-    private void updateClimber(){
-        climb.Climber(controller.getYButton(), controller.getXButton());
-    }
-
      private void updateArm(){
         robotArm.runArm(controller.getAButton(), controller.getBButton());
     }
@@ -40,7 +35,6 @@ public class operatorinterface extends SubsystemBase {
     public void periodic(){
         updateDrive();
         updateIntake();
-        updateClimber();
         updateArm();
     }
     
