@@ -12,12 +12,7 @@ import frc.robot.subsystems.intake;
 import frc.robot.subsystems.climber;
 import frc.robot.subsystems.operatorinterface;
 //might have to import command scheduler if current code doesn't work
-
-
-
-//We're only gonna use this for initializing path planner and autonomous lol
-
-
+//We're only gonna use this for initializing stuff lol
 
 public class Robot extends TimedRobot {
 
